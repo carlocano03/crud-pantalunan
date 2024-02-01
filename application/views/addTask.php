@@ -12,17 +12,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
   <div class="container-fluid my-3">
     <div class="border border-2 rounded-3 d-flex flex-column mb-3 p-3">
-      <form method="post">
-        <label class="form-label" for="task">Task Name</label>
-        <input type="text" class="form-control mb-4" name="task" id="task">
+      <label class="form-label" for="task">Task Name</label>
+      <input type="text" class="form-control mb-4" name="task" id="task">
 
-        <label class="form-label" for="desc">Add Description</label>
-        <textarea class="form-control mb-4" name="desc" id="desc" cols="30" rows="2"></textarea>
+      <label class="form-label" for="desc">Add Description</label>
+      <textarea class="form-control mb-4" name="desc" id="desc" cols="30" rows="2"></textarea>
 
-        <div>
-          <button class="btn btn-success" type="submit">Add Task</button>
-        </div>
-      </form>
+      <div>
+        <button class="btn btn-success" type="submit">Add Task</button>
+      </div>
     </div>
   </div>
 </body>
