@@ -100,7 +100,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
               '<td>' + task.taskDesc + '</td>' +  
               '<td>' +
                 '<div class="d-flex justify-content-center">' +
-                  '<button class="btn btn-success me-3 editBtn" onclick="getTaskById('+ task.taskId +')">Edit Task</button>' +
+                  '<button class="btn btn-info me-3 editBtn" onclick="getTaskById('+ task.taskId +')">Edit Task</button>' +
                   '<button class="btn btn-danger delBtn" onclick="deleteTask('+ task.taskId +')">Delete Task</button>'
                 '</div>' +
               '</td></tr>';
