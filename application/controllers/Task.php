@@ -27,4 +27,9 @@ class Task extends CI_Controller {
       echo json_encode(array('success' => false, 'message' => 'Failed to add task'));
     }
   }
+
+  public function getAllTask() {
+    $tasks = $this->Task_model->getAllTasks();
+    echo json_encode($tasks);
+  }
 }

@@ -4,7 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,12 +21,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <input type="text" class="form-control mb-4" name="task" id="task" required>
 
         <label class="form-label" for="desc">Add Description</label>
-        <input type="text" class="form-control mb-4" name="desc" id="desc" cols="30" rows="2" required>
+        <textarea type="text" class="form-control mb-4" name="desc" id="desc" cols="30" rows="2" required></textarea>
 
         <div>
           <button class="btn btn-success" type="button" onclick="addNewTask($('#task').val(), $('#desc').val())">Add Task</button>
         </div>
       </form>
+    </div>
+    
+    <div class="my-2">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Task</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tasksTable">
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -45,13 +58,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
         type: 'post',
         url: "<?= base_url() . 'task/addTask' ?>",
         data: {
-          'task': task,
-          'desc': desc
+          'taskName': task,
+          'taskDesc': desc
         },
         dataType: 'json',
         success: function(res) {
           alert('Added successfully!');
-          console.log(task, desc);
+          getAllTask();
 
           // reset form after adding
           $('#task').val('');
@@ -63,7 +76,37 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }
       });
     }
+
+    // fetch all task from db
+    function getAllTask() {
+      $.ajax({
+        type: 'post',
+        url: "<?= base_url() . 'task/getAllTask' ?>",
+        dataType: 'json',
+        success: function(res) {
+          $('#tasksTable').empty();
+          $.each(res, function(i, task) {
+
+            // create table row that will handle each task
+            var tblRows = 
+              '<tr><td>' + task.taskName + '</td>' +
+              '<td>' + task.taskDesc + '</td>' +  
+              '<td>' +
+              '<button class="btn btn-success me-2">Edit Task</button>' +
+              '<button class="btn btn-danger">Delete Task</button>'
+              '</td></tr>';
+
+            // push each row to table body
+            $('#tasksTable').append(tblRows);
+          });
+        },
+        error: function() {
+          alert('Error fetching all tasks!');
+        }
+      });
+    }
+    // initiate getAllTask function
+    getAllTask();
   </script>
 </body>
-
 </html>
