@@ -7,7 +7,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CI3 CRUD</title>
+  <title>Tasks CRUD</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -15,27 +15,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <body>
   <div class="container-fluid my-3">
-    <div class="border border-2 rounded-3 mb-3 p-3">
+    <div class="border border-2 rounded-3 mb-4 p-3">
+      <h2 class="text-center mb-3">To-Do</h2>
       <form id="addTaskForm">
-        <label class="form-label" for="task">Task Name</label>
+        <label class="form-label" for="task">Task:</label>
         <input type="text" class="form-control mb-4" name="task" id="task" required>
 
-        <label class="form-label" for="desc">Add Description</label>
+        <label class="form-label" for="desc">Description:</label>
         <textarea type="text" class="form-control mb-4" name="desc" id="desc" cols="30" rows="2" required></textarea>
 
         <div>
-          <button class="btn btn-success" type="button" onclick="addNewTask($('#task').val(), $('#desc').val())">Add Task</button>
+          <button class="btn btn-success" type="button" onclick="addNewTask()">Submit</button>
         </div>
       </form>
     </div>
     
     <div class="my-2">
-      <table class="table table-striped">
+      <table class="table table-striped border border-2">
         <thead>
           <tr>
             <th scope="col">Task</th>
             <th scope="col">Description</th>
-            <th scope="col">Actions</th>
+            <th class="text-center" scope="col">Actions</th>
           </tr>
         </thead>
         <tbody id="tasksTable">
@@ -46,7 +47,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
   <script>
     // add new task to db
-    function addNewTask(task, desc) {
+    function addNewTask() {
+
+      // get task name and description
+      const task = $('#task').val();
+      const desc = $('#desc').val();
 
       // validate form if inputs are empty
       if (task === '' || desc === '') {
@@ -88,11 +93,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
           $.each(res, function(i, task) {
 
             // create table row that will handle each task
-            var tblRows = 
-              '<tr><td>' + task.taskName + '</td>' +
+            const tblRows = 
+              '<tr><td><strong>' + task.taskName + '</strong></td>' +
               '<td>' + task.taskDesc + '</td>' +  
-              '<td>' +
-              '<button class="btn btn-success me-2">Edit Task</button>' +
+              '<td class="d-flex justify-content-center">' +
+              '<button class="btn btn-success me-3">Edit Task</button>' +
               '<button class="btn btn-danger">Delete Task</button>'
               '</td></tr>';
 
