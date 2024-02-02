@@ -14,19 +14,19 @@ class Task_model extends CI_Model {
     }
 
     // fetch specific task by id
-    public function getTaskById($task_id) {
-        $fetch = $this->db->get_where('tasks', array('task_id' => $task_id));
+    public function getTaskById($taskId) {
+        $fetch = $this->db->get_where('tasks', array('taskId' => $taskId));
         return $fetch->row();
     }
 
     // updated selected task
-    public function updateTask($task_id, $data) {
-        $this->db->where('task_id', $task_id);
+    public function editTask($taskId, $data) {
+        $this->db->where('taskId', $taskId);
         $this->db->update('tasks', $data);
     }
 
     // remove task from db
-    public function deleteTask($task_id) {
-        return $this->db->delete('tasks', array('task_id' => $task_id));
+    public function deleteTask($taskId) {
+        return $this->db->delete('tasks', array('taskId' => $taskId));
     }
 }
